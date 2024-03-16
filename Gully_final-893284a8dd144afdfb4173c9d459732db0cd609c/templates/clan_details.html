@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clan Details</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10" rel="stylesheet">
+  <link href="{% static 'css/product-detail.css' %}" rel="stylesheet"/>
+  <style>
+    body {
+  overflow: hidden; 
+}
+    .card {
+      border-radius: 15px;
+      margin-top: -4.5rem;
+    }
+
+    .card-header {
+      background-color: white;
+      color: black;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      position: relative; 
+    }
+
+    
+    .zoomed-img + .card-header::after {
+      opacity: 0; 
+    }
+
+    .card-body {
+      padding: 20px;
+      background-color: #fff1e0; 
+    }
+
+    .card-footer {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .card-text {
+      cursor: default;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="row justify-content-center align-items-center mt-5">
+      <div class="col-lg-6">
+        <div class="card shadow rounded">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="title"><span class="header-title-1">Clan</span><span class="header-title-2">Details</span></h3>
+              {% if team.image %}
+                <img id="team-image" src="{{ team.image.url }}" alt="Team Image" style="max-width: 100px;" onclick="zoomImage()">
+              {% endif %}
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Clan Name: {{ team.name }}</strong></p>
+            <p class="card-text"><strong>Clan Type: {{ team.category }}</strong></p>
+            <p class="card-text"><strong>Team Captain: {{ team.teamcaptain.first_name }}</strong></p>
+            <p class="card-text"><strong>Contact: {{ team.contact }}</strong></p>
+            <p class="card-text"><strong>Location: {{ team.location }}</strong></p>
+            
+          </div>
+          
+
+<div class="card-footer d-flex justify-content-end">
+    <button id="leaveTeamButton" class="btn btn-danger pointer">Leave Team</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.getElementById('leaveTeamButton').addEventListener('click', function() {
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, leave the team!',
+            cancelButtonText: 'No, cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                window.location.href = "{% url 'leave_team' %}";
+            }
+        });
+    });
+</script>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    
+    function zoomImage() {
+      var img = document.getElementById('team-image');
+      img.classList.toggle('zoomed-img'); 
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+</html>
+{% endblock %}

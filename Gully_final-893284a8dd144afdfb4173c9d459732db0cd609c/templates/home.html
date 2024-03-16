@@ -1,0 +1,34 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-lg-5 ml-auto">
+      <h1 class="text-white">Gully Sports Hub</h1>
+      <p class="cursive-text cursive-font-1">
+        ''Where street meets Sports''
+    </p>
+    
+    
+    
+    
+      <div id="date-countdown"></div>
+      <p class="custom-links-container">
+        <a class="custom-link" href="{% url 'join_team' pid=0 %}">
+          <i class="fa fa-user-plus" aria-hidden="true"></i> Join Team
+      </a>
+      
+        <a class="custom-link" href="{% url 'create_team' %}"></i>Create Team</a>
+        <a class="custom-link" href="{% url 'search_opponents' %}"
+          >View Opponents</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Add custom CSS here for responsiveness */
+</style>
+
+{% endblock %}

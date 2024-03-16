@@ -1,0 +1,110 @@
+{% include 'navigation.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Info Card</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .team-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .list-group-item strong {
+            color: #555;
+        }
+        /* Style for the messages */
+
+
+    </style>
+</head>
+<body>
+    <body>
+    <div class="container mt-5">
+        
+        <!-- Display messages if not accepted -->
+        
+            
+        
+        
+        <!-- Display team information if accepted -->
+    
+            <div class="card team-card shadow">
+                <div class="card-body">
+                   {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show {{ message.tags }}" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+
+                    <h5 class="card-title">Team Information</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Team Name:</strong> <span class="text-primary">{{ team.name }}</span></li>
+                        <li class="list-group-item"><strong>Phone Number:</strong> <span class="text-primary">{{ team.contact }}</span></li>
+                        <a class="btn btn-success accept_button" id="notifyback" href="{% url 'accept_challenge' team_captain_username=team.teamcaptain.username %}" role="button">Accept</a>
+                        <a class="btn btn-danger reject_button" id="notifyback" href="{% url 'reject_challenge' team_captain_username=team.teamcaptain.username %}" role="button">Reject</a>
+                    </ul>
+                </div>
+            </div>
+        
+        
+    </div>
+</body>
+
+        
+    </div>
+</body>
+</html>
+<style>
+    button.accept_button,
+    button.reject-button {
+        padding: 8px 16px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+
+
+
+
+
+
+
+

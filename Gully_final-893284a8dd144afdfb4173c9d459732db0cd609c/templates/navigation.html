@@ -1,0 +1,466 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<!-- Icon CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="icon" href="{% static 'images/donation.png' %}">
+<title>Gully Sports Hub</title>
+<!-- Start Nagigation -->
+<body>
+<nav class="navbar navbar-expand-sm navbar-light custom-navbar">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">
+            
+           
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="myMenu">
+            <ul class="navbar-nav pl-5 custom-nav ml-auto">
+                
+                <a href="{% url 'home' %}" class="nav-link">
+                    <i class="fa fa-home" aria-hidden="true"></i> Home
+                </a>
+                
+                {% if not request.user.is_authenticated %}
+                
+                <li class="nav-item"><a href="{% url 'userlogin' %}" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="{% url 'registration' %}" class="nav-link">Signup</a></li>
+                <li class="nav-item"><a href="{% url 'admin_login' %}" class="nav-link">Admin Login</a></li>
+                
+                
+                {% else %}
+                
+
+                <li class="nav-item">
+                    
+                    <a href="#" id="clan" class="nav-link">Clan</a>
+                    
+                </li>
+                
+                
+                
+                    
+                    <div class="d-flex dropstart">
+                        <div class="collapse navbar-collapse dropstart" id="navbarNavDarkDropdown">
+                      <ul class="navbar-nav">
+                        <li class="nav-item dropdown dropdown-menu-start">
+                          <a class="nav-link " href="#"  data-bs-toggle="dropdown" aria-expanded="false">
+                            <i id="bellCount" class="fa-solid fa-bell" data-count="0" ></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-dark  text-wrap" id="notify" style="width: 300px !important;"></ul>
+                        </li>
+                      </ul>
+                        </div>
+                    </div>
+                      
+                  
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+                
+                
+                                
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'images/useravatar.jpg' %}"
+                          style="width:40px;height:40px;border-radius:50%"/>
+                 </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{%url 'profile'%}">Profile</a>
+                        <a class="dropdown-item" href="{%url 'change_password'%}">Change Password</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout/">Logout</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav> 
+
+
+
+{% block body %}{% endblock %}
+
+<style>
+    
+    .custom-navbar {
+        background-color: #3498db; 
+        padding: 5px 20px;
+    }
+    .custom-navbar {
+        position: fixed;
+    
+        width: 100%;
+        z-index: 1000; 
+      }
+
+    .navbar-brand {
+        color: #fff;
+        font-weight: bold; 
+    }
+
+    .navbar-toggler-icon {
+        border-color: #fff;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center; 
+        margin-left: auto; 
+    }
+
+    .nav-link {
+        color: #fff !important; 
+        margin-right: 35px;
+    }
+
+    .nav-link:hover {
+        color: #f0f0f0 !important; 
+    }
+
+    .dropdown-menu {
+        background-color: #2c3e50; 
+    }
+
+    .dropdown-item {
+        color: #fff !important; 
+    }
+
+    .dropdown-item:hover {
+        background-color: #34495e;
+    }
+
+    .fa-solid {
+        font-size: 20px; 
+    }
+
+    
+    #bellCount[data-count]:after {
+        content: attr(data-count);
+        font-size: 70%;
+        margin-left: -10px; 
+        margin-top: -13px;  
+        font-weight: bold; 
+        color: red; 
+    }
+    
+
+    
+    @media (max-width: 576px) {
+        .navbar-nav {
+            margin-left: 0;
+            flex-direction: column; 
+            align-items: flex-start;
+        }
+
+        .nav-link {
+            margin-right: 0; 
+            margin-bottom: 5px;
+        }
+    }
+    
+button.accept-button,
+button.reject-button,button.view-button {
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
+button.view-button {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+button.accept-button {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+button.reject-button {
+    background-color: #f44336; 
+    color: white;
+}
+#chatbox {
+    display: none;
+    width: 700px;
+    height: 600px;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
+}
+
+#chat-messages {
+    max-height: calc(100% - 600px);
+    overflow-y: auto;
+    
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+#chat-form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#message-input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#send-button {
+    padding: 8px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+</style>
+
+
+ 
+</body>
+</html>
+
+<script>
+    function getCookie(name) {
+    
+    var cookies = document.cookie.split(';');
+    
+
+    
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+
+        
+        if (cookie.startsWith(name + '=')) {
+            
+            return cookie.substring(name.length + 1);
+        }
+    }
+
+    
+    return null;
+}
+    var tid = getCookie('tid');
+
+    // Get the element with the ID 'clan'
+    var clanLink = document.getElementById('clan');
+    if (tid !== null && tid !== '') {
+    document.getElementById('clan').setAttribute("href",`/clan/${ getCookie('tid')}`)
+    }
+    else {
+        // If 'tid' is empty, disable the link
+        clanLink.removeAttribute('href');
+        clanLink.style.pointerEvents = 'none';
+    }
+</script>
+
+
+<script>
+    const notifySocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/notify/'
+    );
+
+    notifySocket.onopen = function (e) {
+        console.log('Socket successfully connected.');
+    };
+
+    notifySocket.onclose = function (e) {
+        console.log('Socket closed unexpectedly');
+    };
+
+    notifySocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const message = data.message.split('.');
+        
+        
+        console.log(message);
+        setMessage(message);
+
+    };
+
+    let senderId;
+    function setSenderId(id) {
+        senderId = id;
+    }
+
+    let Teamid;
+    function setTeamId(id) {
+        Teamid = id;
+    }
+
+    function setMessage(message) {
+          var newLi = document.createElement('li');
+          const containsRejected = message[0].toLowerCase().includes("rejected");
+             var newAnchor = document.createElement('a');
+            newAnchor.className = 'dropdown-item text-wrap';
+            newAnchor.textContent = message[0];
+            var viewButton = document.createElement('button');
+            viewButton.className = 'view-button';
+            viewButton.textContent = 'View Match';
+            viewButton.addEventListener('click', function() {
+            console.log('Accepted');
+            
+        window.location.href = `/infocard/${message[1]}`;
+
+            });
+            var infoButton = document.createElement('button');
+            infoButton.className = 'view-button';
+            infoButton.textContent = 'View info';
+            infoButton.addEventListener('click', function() {
+                console.log('Accepted');
+                
+        window.location.href = `/acceptedcard/${message[2]}`;
+
+            });
+
+            var rejectButton = document.createElement('button');
+            rejectButton.className = 'reject-button';
+            rejectButton.textContent = 'Reject';
+            rejectButton.addEventListener('click', function() {
+                const rejectionMessage = "Your request has been rejected.";
+                console.log('Rejected');
+                notifySocket.send(JSON.stringify({
+                    type: "rejection",
+                    message: rejectionMessage
+                }));
+            });
+            newLi.appendChild(newAnchor);
+            if (message[1]){
+            
+            newLi.appendChild(viewButton);
+            newLi.appendChild(rejectButton);
+            }
+            else{
+                if (!containsRejected){
+
+                newLi.appendChild(infoButton);
+                }
+            }
+            
+
+
+            
+            
+
+            var ulElement = document.getElementById('notify');
+            ulElement.appendChild(newLi);
+
+            var count = parseInt(document.getElementById('bellCount').getAttribute('data-count'));
+            count++;
+            document.getElementById('bellCount').setAttribute('data-count', count);
+    
+            var newLi = document.createElement('li');
+
+            var newAnchor = document.createElement('a');
+            newAnchor.className = 'dropdown-item text-wrap';
+            newAnchor.textContent = message;
+            newLi.appendChild(newAnchor);
+
+
+        
+    }
+
+    
+
+    
+</script>
+
+
+    
+    
+
+
+{% for i in messages %}
+<script>
+    swal({
+        title: "{{ i }}",
+        icon: "info",
+        button: "OK"
+    });
+
+    $(document).ready(function () {
+        $('.collapse').on('show.bs.collapse', function () {
+            $(this).addClass('show');
+        });
+
+        $('.collapse').on('hide.bs.collapse', function () {
+            $(this).removeClass('show');
+        });
+    });
+</script>
+{% endfor %}
+
+
+</body>
+</html>

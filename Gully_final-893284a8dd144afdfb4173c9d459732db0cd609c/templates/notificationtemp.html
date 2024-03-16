@@ -1,0 +1,193 @@
+<!-- notification_template.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .notification-icon {
+            font-size: 24px;
+            color: #333;
+        }
+        .notification-list {
+            list-style: none;
+            padding: 0;
+        }
+        .notification-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .notification-message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .notification-buttons {
+            margin-top: 5px;
+        }
+        .accept-button, .reject-button {
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .accept-button {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .reject-button {
+            background-color: #dc3545;
+            color: #fff;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center mb-4">Notifications</h2>
+                <!-- Bell Icon for Notification Count -->
+                <div class="text-center">
+                    <i class="fas fa-bell notification-icon" id="bellIcon" data-count="0"></i>
+                </div>
+                <!-- Notification List -->
+                <ul class="notification-list" id="notificationList">
+                    <!-- Notification items will be added dynamically here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript libraries (Bootstrap, Font Awesome) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+    <!-- Custom JavaScript for notification functionality -->
+    <script>
+        // This JavaScript code will handle notifications dynamically
+        // You can include this script in a separate file if needed
+
+        // Sample notification data
+        const notifications = [
+            { id: 1, message: "Notification 1" },
+            { id: 2, message: "Notification 2" },
+            { id: 3, message: "Notification 3" }
+        ];
+
+        // Function to render notifications
+        function renderNotifications() {
+            const notificationList = document.getElementById('notificationList');
+            notificationList.innerHTML = ''; // Clear existing notifications
+
+            notifications.forEach(notification => {
+                const listItem = document.createElement('li');
+                listItem.className = 'notification-item';
+                listItem.innerHTML = `
+                    <div class="notification-message">${notification.message}</div>
+                    <div class="notification-buttons">
+                        <button class="accept-button" onclick="acceptNotification(${notification.id})">Accept</button>
+                        <button class="reject-button" onclick="rejectNotification(${notification.id})">Reject</button>
+                    </div>
+                `;
+                notificationList.appendChild(listItem);
+            });
+
+            updateNotificationCount(); // Update notification count
+        }
+
+        // Function to update notification count
+        function updateNotificationCount() {
+            const bellIcon = document.getElementById('bellIcon');
+            const notificationCount = notifications.length;
+            bellIcon.setAttribute('data-count', notificationCount);
+        }
+
+        // Function to handle accepting a notification
+        function acceptNotification(notificationId) {
+            // Perform logic to accept the notification
+            console.log(`Accepted notification with ID ${notificationId}`);
+            // You can update UI or perform other actions here as needed
+        }
+
+        // Function to handle rejecting a notification
+        function rejectNotification(notificationId) {
+            // Perform logic to reject the notification
+            console.log(`Rejected notification with ID ${notificationId}`);
+            // You can update UI or perform other actions here as needed
+        }
+
+        // Render notifications when the page loads
+        document.addEventListener('DOMContentLoaded', renderNotifications);
+    </script>
+    <script>
+        // WebSocket setup
+const notifySocket = new WebSocket(
+    'ws://' + window.location.host + '/ws/notify/'
+);
+
+// Function to handle incoming notifications
+notifySocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    const message = data.message;
+    setMessage(message);
+};
+
+// Function to handle setting the notification message
+function setMessage(message) {
+    // Create list item for the notification
+    var newLi = document.createElement('li');
+
+    // Anchor element for the notification message
+    var newAnchor = document.createElement('a');
+    newAnchor.className = 'dropdown-item text-wrap';
+    newAnchor.textContent = message;
+
+    // Accept button
+    var acceptButton = document.createElement('button');
+    acceptButton.className = 'accept-button';
+    acceptButton.textContent = 'Accept';
+    acceptButton.addEventListener('click', function() {
+        console.log('Accepted');
+        // Handle accept logic here (e.g., redirect to infocard)
+        redirectToInfocard();
+    });
+
+    // Reject button
+    var rejectButton = document.createElement('button');
+    rejectButton.className = 'reject-button';
+    rejectButton.textContent = 'Reject';
+    rejectButton.addEventListener('click', function() {
+        console.log('Rejected');
+        // Handle reject logic here
+    });
+
+    // Append elements to the list item
+    newLi.appendChild(newAnchor);
+    newLi.appendChild(acceptButton);
+    newLi.appendChild(rejectButton);
+
+    // Append list item to the notification list
+    var ulElement = document.getElementById('notification-list');
+    ulElement.appendChild(newLi);
+
+    // Update notification count
+    var count = document.getElementById('bellCount').getAttribute('data-count');
+    document.getElementById('bellCount').setAttribute('data-count', parseInt(count) + 1);
+}
+
+// Function to redirect to the infocard page
+function redirectToInfocard() {
+    // Redirect to the infocard page
+    window.location.href = "infocard";
+}
+
+    </script>
+</body>
+</html>

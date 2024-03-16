@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Already Joined Team</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <script>
+        // Display SweetAlert message
+        swal("Oops!", "{{ message }}", "error").then((value) => {
+            // Redirect to the team details page
+            window.location.href = "{% url 'team_details' %}";
+        });
+    </script>
+</body>
+</html>

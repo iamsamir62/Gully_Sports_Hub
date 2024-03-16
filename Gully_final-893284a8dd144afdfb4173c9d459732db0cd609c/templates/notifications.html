@@ -1,0 +1,13 @@
+<!-- Inside the template -->
+<li class="nav-item dropdown notification-section">
+    <a href="#" class="notification dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bell"></i>
+        <span class="badge" id="notification-badge">{% messages_unread %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notifications-dropdown">
+        {% for message in messages %}
+            <a class="dropdown-item" href="#">{{ message }}</a>
+            <div class="dropdown-divider"></div>
+        {% endfor %}
+    </div>
+</li>

@@ -1,0 +1,83 @@
+<style>
+    /* Notification container */
+    .notification-container {
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    /* Notification message */
+    .notification-message {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    /* Timestamp */
+    .notification-timestamp {
+        font-size: 12px;
+        color: #777;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+        margin-top: 10px;
+    }
+
+    .accept-button,
+    .reject-button,
+    .delete-button {
+        padding: 8px 15px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .accept-button {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .reject-button {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .delete-button {
+        background-color: #bbb;
+        color: white;
+    }
+</style>
+
+{% for notification in notifications %}
+    <div class="notification-container">
+        <p class="notification-message">{{ notification.message }}</p>
+        <small class="notification-timestamp">{{ notification.timestamp }}</small>
+        
+        <!-- Action buttons -->
+        <div class="action-buttons">
+            <button class="accept-button" onclick="acceptNotification({{ notification.id }})">Accept</button>
+            <button class="reject-button" onclick="rejectNotification({{ notification.id }})">Reject</button>
+            <button class="delete-button" onclick="deleteNotification({{ notification.id }})">Delete</button>
+        </div>
+    </div>
+{% endfor %}
+
+<script>
+    function acceptNotification(notificationId) {
+        // Handle accept action, you can make an AJAX request or perform any desired action
+        console.log('Accepting notification with ID:', notificationId);
+    }
+
+    function rejectNotification(notificationId) {
+        // Handle reject action, you can make an AJAX request or perform any desired action
+        console.log('Rejecting notification with ID:', notificationId);
+    }
+
+    function deleteNotification(notificationId) {
+        // Handle delete action, you can make an AJAX request or perform any desired action
+        console.log('Deleting notification with ID:', notificationId);
+    }
+</script>

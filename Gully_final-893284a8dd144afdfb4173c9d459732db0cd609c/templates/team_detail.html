@@ -1,0 +1,153 @@
+{% load static %}
+<html>
+<head>
+    <title>Team Details</title>
+    <link href="{% static 'css/product-detail.css' %}" rel="stylesheet"/>
+    <link href="https://w3learnpoint.com/cdn/jquery-picZoomer.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+{% include 'navigation.html' %}
+
+<section id="services" class="services section-bg">
+    <div class="container">
+      <div class="col-sm-12 text-center mb-4 title_bx">
+        <h3 class="title"><span class="header-title-1">Team</span><span class="header-title-2">Details</span></h3>
+      </div>
+       <div class="row row-sm">
+          <div class="col-md-6 _boxzoom">
+             {% comment %} <div class="zoom-thumb">
+                <ul class="piclist">
+                   <li><img src="https://s.fotorama.io/3.jpg" alt=""></li>
+                   <li><img src="https://s.fotorama.io/3.jpg" alt=""></li>
+                   <li><img src="https://s.fotorama.io/3.jpg" alt=""></li>
+                   <li><img src="https://ucarecdn.com/382a5139-6712-4418-b25e-cc8ba69ab07f/-/stretch/off/-/resize/760x/" alt=""></li>
+                </ul>
+             </div> {% endcomment %}
+             <div class="col-sm-6">
+            <div class="form-group">
+               {% if messages %}
+  <div class="messages">
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+               
+                <img src = "{{team.image.url}}" width="400" height="350">
+            </div>
+        </div>
+             <div class="_p-images">
+                <div class="picZoomer">
+                   <img class="my_img" src="{{team.image.url}}" alt="team images">
+                </div>
+             </div>
+          </div>
+          <div class="col-md-6">
+             <div class="_p-content">
+              
+                <p class="_p-name p-name">Team Name:{{team.name}} </p>
+                <div class="_p-price-box">
+                   <div class="p-list">
+                     <p class="_p">Team Captain = {{team.teamcaptain}} </p>
+                     <p class="_p">Team Members = {{team.noofplayers}} </p>
+                     <p class="_p">Prefered game= {{team.category}} </p>
+                     
+                      
+                   </div>
+                   
+                   
+                   
+                   <form action="{% url 'joinclan' pid=pid %}" method="post" accept-charset="utf-8">
+                      
+                     
+                    {% csrf_token %}
+                    
+                      <ul class="spe_ul"></ul>
+                      <div class="_p-qty-and-cart">
+                         <div class="_p-add-cart">
+                           
+                               <a id="joinTeamButton" href="{% url 'joinclan' pid=pid %}" class="btn btn-primary join-team-btn">Join Team</a>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.getElementById('joinTeamButton').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        
+        Swal.fire({
+            title: 'Join Team Confirmation',
+            text: 'Are you sure you want to join this team?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, join team!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                window.location.href = event.target.href;
+            }
+        });
+    });
+</script>
+
+                             
+                               <a href="{% url 'join_team' pid=0%}" class="btn btn-primary">View Teams</a>
+                               
+                              
+
+                             
+                              
+
+                            
+                            <input type="hidden" name="pid" value="18" />
+                            <input type="hidden" name="price" value="850" />
+                            <input type="hidden" name="url" value="" />   
+                         </div>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+<script src="{% static 'js/product-detal.js' %}"></script>
+<style>
+   .my_img {
+      vertical-align: middle;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 100%;
+  }
+  ._boxzoom ._product-images {
+   width: 80%;
+   display: inline-block;
+}
+._boxzoom ._product-images .picZoomer {
+   width: 100%;
+}
+._boxzoom ._product-images .picZoomer .picZoomer-pic-wp img {
+   left: 0px;
+}
+._boxzoom ._product-images .picZoomer img.my_img {
+   width: 100%;
+}
+.piclist li img {
+   height:100px;
+   object-fit:cover;
+}
+</style>
+

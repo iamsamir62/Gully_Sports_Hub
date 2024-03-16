@@ -1,0 +1,14 @@
+<!-- join_team_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Team Confirmation</title>
+</head>
+<body>
+    <h1>Joined Team Confirmation</h1>
+    <p>You have successfully joined the team "{{ team_name }}".</p>
+    <a href="{% url 'team_detail' team_id %}">Go to Team Page</a>
+</body>
+</html>

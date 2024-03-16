@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+</head>
+<body>
+    <input type="text" id="chat-message-input" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // WebSocket connection
+        const chatSocket = new WebSocket('ws://localhost:8000/ws/chat/');
+
+        chatSocket.onopen = function (event) {
+            console.log('Chat socket successfully connected.');
+        };
+
+        chatSocket.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            const message = data.message;
+            // Handle the received chat message, e.g., display it in the chat UI
+            displayChatMessage(message);
+        };
+
+        chatSocket.onclose = function (event) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        function sendMessage() {
+            // Get the message input element
+            const messageInput = document.getElementById('chat-message-input');
+            
+            // Check if the messageInput is not null before accessing its value
+            if (messageInput) {
+                // Get the value of the input field (the message)
+                const message = messageInput.value;
+
+                // Check if the message is not empty
+                if (message.trim() !== '') {
+                    // Create a message object
+                    const messageData = {
+                        type: 'chat.message',
+                        message: message,
+                    };
+
+                    // Send the message data as JSON to the server
+                    chatSocket.send(JSON.stringify(messageData));
+
+                    // Clear the input field
+                    messageInput.value = '';
+                }
+            }
+        }
+
+        function displayChatMessage(message) {
+            // Handle displaying the message in the chat UI (e.g., append it to a chat log)
+            console.log('Received message:', message);
+        }
+    </script>
+</body>
+</html>

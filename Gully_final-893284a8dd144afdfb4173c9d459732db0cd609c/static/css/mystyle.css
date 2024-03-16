@@ -1,0 +1,83 @@
+/* Change Brand Font */
+.navbar-brand {
+  font-family: 'Monotype Corsiva';
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Change Navigation Color */
+.nav-link,
+.dropdown-item {
+  color: #fff !important; /* Set the text color to white */
+  font-size: 20px;
+}
+
+/* Navbar Hover Styles */
+.navbar-nav .nav-link:hover,
+.navbar-nav .dropdown-item:hover {
+  color: #000 !important; /* Change the text color on hover to black */
+  background-color: #3498db; /* Match the navbar background color on hover */
+  border-radius: 10px;
+  transition: background-color 0.5s ease; /* Add transition for background color change */
+}
+
+/* Add Styles for the Body Background */
+body::before {
+  content: "";
+  background: rgba(52, 152, 219, 0.5); /* Adjust the transparency and color as needed */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+
+
+/* Change Footer Social Icon Color */
+#footer a,#contact a{
+  color:  #EE1D29;
+}
+#footer a:hover {
+  color:white;
+}
+
+#contact a:hover {
+  color: blue;
+}
+
+
+/*scroll button start*/
+#scrollbtn
+{
+
+position:fixed;
+bottom:20px;
+right:40px;
+z-index:99;
+border:none;
+color:red;
+background:#00abff;
+padding:10px;
+border-radius:10px;
+}
+/*scroll button end*/
+
+html{
+scroll-behavior:smooth;
+}
+
+#login
+{
+background-size : 99%;
+background-position : 0px 80px;
+background-repeat : no-repeat;
+opacity : 0.8
+}
+
+#signupform{
+background : url('/static/images/bg_texture.png');
+color : white;
+}
+

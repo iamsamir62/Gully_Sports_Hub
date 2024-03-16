@@ -1,0 +1,102 @@
+body {
+    background-image: url('/static/images/bg_3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure the background covers the full viewport height */
+}
+
+
+body::before {
+    content: "";
+    background: rgba(58,70,100, 0.5); /* Adjust the transparency as needed (0.5 means 50% black) */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+
+.custom-links-container {
+    margin-left: -10px;
+}
+.text-white {
+    color: #fff; /* Set text color to white */
+    font-family: 'Arial', sans-serif; /* Choose a suitable font family */
+    text-align: center; /* Center the text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 10); /* Add a subtle text shadow */
+    margin-bottom: 15px; /* Add some space below the heading */
+    margin-top: 155px; /* Add some space below the heading */
+    font-size: 36px;
+    font-weight: bold;
+    margin-right: 150px;
+}
+.custom-link {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-link:hover {
+    background-color: #45a049;
+    text-decoration: none;
+    color:black;
+}
+
+  /* Font Styles */
+  .cursive-font-1 {
+    font-family: 'Pacifico', cursive;
+    
+}
+
+
+
+/* Common Style */
+.cursive-text {
+    font-size: 18px;
+    margin-top: 5px;
+    text-align: center;
+    padding-left: 20px;
+    text-shadow: 2px 2px 4px rgba(250, 244, 244, 0.8);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .custom-link {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    .custom-links-container {
+        margin-left: 0;
+    }
+    .cursive-text {
+        padding-left: 10px; /* Adjust padding for smaller screens */
+      }
+}
+
+
+/* Style for the heading and paragraph */
+
+    
+
+p {
+   
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Style for the date countdown */
+
+
+

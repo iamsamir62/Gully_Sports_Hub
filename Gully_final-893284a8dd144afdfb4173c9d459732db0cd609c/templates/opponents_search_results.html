@@ -1,0 +1,120 @@
+<!-- Inside opponents_search_results.html -->
+{% load static %}
+
+{% block content %}
+  {% include 'navigation.html' %}
+  
+
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar content... -->
+
+    <div id="page-content-wrapper">
+      <!-- Navbar content... -->
+      <!-- Add a container to display nearby teams -->
+
+      
+
+<div class="small-alerts">
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible small {{ message.tags }}" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {% if message %}
+        {{message}}
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+      <div class="container-fluid mt-2">
+        
+
+        <div class="container-fluid">
+          
+          <div class="row w-100 mx-auto">
+            <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+            
+            
+            
+              
+                
+
+            {% if nearby_teams %}
+              {% for team in nearby_teams %}
+              
+                <div class="col-md-3" style="margin: 10px 0;">
+                  <div class="card" align="center" style="border: 1px solid lightgrey; width: 200px; height: 350px;">
+                    <img class="card-img-top img-thumbnail" src="{{ team.image.url }}" style="width: 100%; height: 240px;" alt="card-img">
+                    <div class="card-body">
+                      <h6 class="card-title" style="font-size: 13px; text-align: left;">
+                        <span style="vertical-align: middle; white-space: nowrap;">Team Name: {{ team.name }}</span>
+                        <br>
+                        <span style="display: inline-block; text-align: center; vertical-align: middle;">Distance: {{ team.distance }} km</span>
+                        <br>
+                        <span style="display: inline-block; text-align: center; vertical-align: middle; font-size: 11px;">Preferred Games: {{ team.category }}</span>
+                      </h6>
+                      <p class="card-text" style="font-size: 14px;">{{ team.description }}</p>
+                      <!-- Inside opponents_search_results.html -->
+
+                      <!-- Include SweetAlert library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<a id="challengeButton" href="{% url 'challenge_opponent' team_captain_username=team.teamcaptain.username %}" class="btn btn-primary" style="font-size: 13px; color: white;">
+    <i class="fas fa-handshake"></i> Challenge Opponent
+</a>
+
+
+<script>
+    
+    document.getElementById('challengeButton').addEventListener('click', function(event) {
+        
+        event.preventDefault();
+
+        
+        Swal.fire({
+            title: 'Confirm Challenge',
+            text: 'Are you sure you want to challenge this opponent?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, challenge!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            
+            if (result.isConfirmed) {
+                
+                window.location.href = event.target.href;
+            }
+        });
+    });
+</script>
+
+                    
+
+
+                      <br><br>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="col-md-12" style="text-align: center; margin-top: 20px;">
+                No teams found
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+{% endblock %}
+<style>
+  .small-alerts {
+    max-width: 300px;
+    margin: 0 auto; 
+}
+</style>

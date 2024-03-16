@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<!-- Display Messages -->
+<!-- Display Messages -->
+
+
+{% if msg %}
+    {{msg}}
+
+{% endif %}
+
+<div class="card shadow mt-5" style="max-width: 800px; margin-top: 100px;">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">Create Team</h5>
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <div class="row">
+                    <!-- Game Type -->
+                    <div class="col-md-6 mb-3">
+                        <label>Game Type</label>
+                        <select name="category" class="form-control" required>
+                            <option value="">Preferred game</option>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Team Name -->
+                    <div class="col-md-6 mb-3">
+                        <label>Team Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Team Name" required>
+                    </div>
+
+                    
+                    <div class="col-md-6 mb-3">
+                        <label>Team Captain</label>
+                        <input type="text" name="teamcaptain" class="form-control" value="{{ request.user.first_name }}" readonly>
+                    </div>
+
+                    
+                    <div class="col-md-6 mb-3">
+    <label>Contact</label>
+    <input type="number" id="contact" name="contact" class="form-control" placeholder="Contact" required>
+    <small class="text-danger" id="contactError" style="display: none;">Mobile number must be 10 digits.</small>
+</div>
+
+
+                    <!-- Image Upload -->
+                    <div class="col-md-6 mb-3">
+                        <label>Image</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+
+                    <!-- Number of Players -->
+                    <div class="col-md-6 mb-3">
+                        <label>No Of Players</label>
+                        <input type="number" name="noofplayers" class="form-control" placeholder="No of players" required>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <button type="button" onclick="getLocationAndSetInput()" class="btn btn-primary btn-block">Get Location</button>
+                    </div>
+
+                    <div class="col-sm-2 mb-3">
+                        <input type="text" id="id_location" name="location" style="display: none; width: 80%;" class="form-control">
+                    </div>
+                    
+                    
+
+                    <div class="col-sm-2 mb-3">
+                        <input type="submit" value="Submit" class="btn btn-warning btn-block" id="submit-button" disabled>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        
+        margin-bottom: 20px;
+    }
+    
+
+    
+</style>
+<script>
+    function validateForm() {
+    var contactInput = document.getElementById("contact");
+    var contactValue = contactInput.value;
+
+    // Check if the contact value is exactly 10 digits
+    if (contactValue.length !== 10 || isNaN(contactValue)) {
+        document.getElementById("contactError").style.display = "block";
+        return false; // Prevent form submission
+    } else {
+        document.getElementById("contactError").style.display = "none";
+        return true; // Allow form submission
+    }
+}
+
+</script>
+
+
+
+
+<script>
+    function getLocationAndSetInput() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var location = `Latitude: ${latitude}, Longitude: ${longitude}`;
+                var locationInput = document.getElementById("id_location");
+        
+                // Set the location in the hidden input field
+                locationInput.value = location;
+    
+                // Enable the "Submit" button
+                document.getElementById("submit-button").disabled = false;
+            });
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+
+
+
+
+</script>
+
+{% endblock %}

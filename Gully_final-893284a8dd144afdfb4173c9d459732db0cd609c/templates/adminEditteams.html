@@ -1,0 +1,56 @@
+{% extends 'admin_base.html' %}
+{% block main %}
+
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">Edit Product</h5>
+        <div class="container-fluid">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Product Category</label>
+                            <select name="category" class="form-control" required>
+                                <option value="">Choose Category</option>
+                                {% for i in category %}
+                                <option value="{{i.id}}" {% if i.id == product.category.id %}selected{% endif %}>{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Team Name</label>
+                            <input type="text" name="name" class="form-control" value="{{team.name}}" placeholder="Category Name">
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>contact</label>
+                            <input type="text" name="contact" class="form-control" value="{{team.contact}}" placeholder="Apply Discount">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label> Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <img src="{{team.image.url}}" style="width:100%;height:80px">
+                    </div>
+
+                    
+                <input type="submit" value="Submit" class="m-2 px-3 btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

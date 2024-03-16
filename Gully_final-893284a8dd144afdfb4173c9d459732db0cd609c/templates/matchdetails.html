@@ -1,0 +1,96 @@
+{% include 'navigation.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Info Card</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .team-card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .list-group-item strong {
+            color: #555;
+        }
+
+        .handshake-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Handshake logo -->
+        <div class="handshake-logo">
+            <img src="{% static 'handshake_logo.png' %}" alt="Handshake Logo" width="200">
+        </div>
+
+        <!-- Team cards -->
+        <div class="team-card-container">
+            <!-- Team card 1 -->
+            <div class="card team-card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Team Information</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Team Name:</strong> <span class="text-primary">{{ team1.name }}</span></li>
+                        <li class="list-group-item"><strong>Phone Number:</strong> <span class="text-primary">{{ team1.contact }}</span></li>
+                        <li class="list-group-item"><strong>Game Type:</strong> <span class="text-primary">{{ team1.category }}</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Team card 2 -->
+            <div class="card team-card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Team Information</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Team Name:</strong> <span class="text-primary">{{ team2.name }}</span></li>
+                        <li class="list-group-item"><strong>Phone Number:</strong> <span class="text-primary">{{ team2.contact }}</span></li>
+                        <li class="list-group-item"><strong>Game Type:</strong> <span class="text-primary">{{ team2.category }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

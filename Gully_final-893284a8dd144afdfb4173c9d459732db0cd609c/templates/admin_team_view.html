@@ -1,0 +1,46 @@
+{% extends 'admin_base.html' %}
+{% block main  %}
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <h5 class="p-2" style="border-bottom: 2px solid orange;">All Category</h5>
+        <div class="container-fluid">
+
+            <table class="table table-bordered table-sm" id="example">
+                <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Category</th>
+                    <th>Team Name</th>
+                    <th>TeamCaptain</th>
+                    <th>Contact</th>
+                    <th>Image</th>
+                    
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in team %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.category}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.teamcaptain}}</td>
+                    <td>{{i.contact}}</td>
+                    <td><img src="{{i.image.url}}" style="width:80px;height:80px"/></td>
+                    <td>
+                        <a href="/edit_teams/{{i.id}}/" class="text-success">Edit</a>
+                        <a href="/delete-team/{{i.id}}/" class="text-danger"
+                           onclick="return confirm('Are You Sure?')">Delete</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
